@@ -1,0 +1,15 @@
+{
+  "name": "pos-system-desktop",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.9.1",
+    "@tauri-apps/cli": "^2.9.5",
+    "axios": "^1.13.2",
+    "net": "^1.0.2"
+  }
+}
