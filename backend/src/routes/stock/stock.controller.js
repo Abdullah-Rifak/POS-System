@@ -81,9 +81,6 @@ const httpUpdateCombined = async (req, res) => {
     const { id } = req.params;
     const { returnItem, quantity } = req.body;
 
-    console.log("[httpUpdateCombined] Received ID:", id);
-    console.log("[httpUpdateCombined] Body data:", { returnItem, quantity });
-
     //  Validate input
     if (!id) return res.status(400).json({ message: "Missing stock ID" });
     if (returnItem == null || quantity == null)
@@ -104,8 +101,6 @@ const httpUpdateCombined = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    console.error("Error in httpUpdateCombined:", error);
-
     //  Distinguish logic vs system error
     if (error.message.includes("not found")) {
       return res.status(404).json({ success: false, message: error.message });
@@ -127,7 +122,6 @@ const httpUpdateStock = async (req, res) => {
       .status(201)
       .json({ message: "stock entry updated", updatedStock });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "error updating Stock entry", error });

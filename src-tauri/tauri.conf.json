@@ -1,17 +1,17 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "shaza-food",
+  "productName": "POS System",
   "version": "0.1.0",
-  "identifier": "com.shaza-new.pos-system",
+  "identifier": "com.pos-system.desktop",
 
   "build": {
     "beforeDevCommand": {
       "script": "npm run start",
-      "cwd": "../frontend/src"
+      "cwd": "../frontend"
     },
     "beforeBuildCommand": {
       "script": "npm run build",
-      "cwd": "../frontend/src"
+      "cwd": "../frontend"
     },
     "devUrl": "http://localhost:3000",
     "frontendDist": "../frontend/build"
@@ -20,23 +20,31 @@
   "app": {
     "windows": [
       {
-        "title": "pos-system",
+        "title": "POS System - Desktop",
         "width": 1280,
         "height": 800,
-        "resizable": true
+        "minWidth": 1024,
+        "minHeight": 768,
+        "resizable": true,
+        "fullscreen": false
       }
     ]
   },
 
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["msi", "nsis"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
       "icons/128x128@2x.png",
-      "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "resources": ["../backend", "../node_runtime"],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
   }
 }

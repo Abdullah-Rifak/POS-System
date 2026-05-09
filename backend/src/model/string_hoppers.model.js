@@ -1,4 +1,7 @@
 const String_Hoppers = require("./string_hoppers.mongo");
+const String_Hoppers_Price = require("./string_hoppers_price.mongo");
+
+const DEFAULT_STRING_HOPPERS_PRICE = 4;
 
 const createStringHoppers = async (data) => {
   try {
@@ -53,7 +56,7 @@ const updateStringHoppers = async (data) => {
         type: data.type,
         amount: data.amount,
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updatedStringHoppers) {
@@ -67,9 +70,50 @@ const updateStringHoppers = async (data) => {
   }
 };
 
+const getStringHoppersPrice = async () => {
+  try {
+    const priceDoc = await String_Hoppers_Price.findOneAndUpdate(
+      { key: "string_hoppers_price" },
+      {
+        $setOnInsert: {
+          key: "string_hoppers_price",
+          price: DEFAULT_STRING_HOPPERS_PRICE,
+        },
+      },
+      { new: true, upsert: true },
+    );
+
+    return priceDoc;
+  } catch (error) {
+    console.error("Error fetching string hoppers price", error.message);
+    throw error;
+  }
+};
+
+const updateStringHoppersPrice = async (price) => {
+  if (!Number.isFinite(Number(price)) || Number(price) < 0) {
+    throw new Error("Valid non-negative price is required");
+  }
+
+  try {
+    const updatedPriceDoc = await String_Hoppers_Price.findOneAndUpdate(
+      { key: "string_hoppers_price" },
+      { key: "string_hoppers_price", price: Number(price) },
+      { new: true, upsert: true, runValidators: true },
+    );
+
+    return updatedPriceDoc;
+  } catch (error) {
+    console.error("Error updating string hoppers price", error.message);
+    throw error;
+  }
+};
+
 module.exports = {
   createStringHoppers,
   getAllStringHoppers,
   deleteStringHoppers,
   updateStringHoppers,
+  getStringHoppersPrice,
+  updateStringHoppersPrice,
 };

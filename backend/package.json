@@ -6,6 +6,7 @@
     "dev": "nodemon server.js",
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
+    "generate:license": "node scripts/generate-license.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

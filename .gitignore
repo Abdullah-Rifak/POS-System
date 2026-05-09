@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Rust / Tauri
+src-tauri/target/
+target/
+
+# Frontend build output
+frontend/build/
+
+# Build and runtime artifacts
+build.log
+dist_for_vm/
+dist_for_vm.zip
+
+# Local runtime/tooling bundles
+node_runtime/
+
+# Local media and temporary files
+*.mp4
+*.log
+*.tmp
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

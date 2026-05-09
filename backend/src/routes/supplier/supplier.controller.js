@@ -11,7 +11,6 @@ const httpCreateSupplier = async (req, res) => {
   try {
     return res.status(201).json(await createSupplier(req.body));
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "Error creating supplier in the controller" });

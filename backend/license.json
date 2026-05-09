@@ -1,0 +1,10 @@
+{
+  "payload": {
+    "customer": "Abdullah",
+    "machineId": "*",
+    "plan": "monthly",
+    "issuedAt": "2026-02-26T08:47:33.987Z",
+    "expiresAt": "2026-03-28T08:47:33.987Z"
+  },
+  "signature": "3e95e5ff92b66a519af009f683fe4128538a7e95efaca565effb31a4966bdf30"
+}

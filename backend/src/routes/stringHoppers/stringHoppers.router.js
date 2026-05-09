@@ -4,6 +4,8 @@ const {
   httpGetAllStringHoppers,
   httpDeleteStringHoppers,
   httpUpdateStringHoppers,
+  httpGetStringHoppersPrice,
+  httpUpdateStringHoppersPrice,
 } = require("./stringHoppers.controller");
 
 const { roleCheck, protect } = require("../authMiddleware/authMiddleware");
@@ -13,7 +15,14 @@ HopperRouter.post(
   "/create",
   protect,
   roleCheck(["Salesman"]),
-  httpCreateStringHoppers
+  httpCreateStringHoppers,
+);
+HopperRouter.get("/price", httpGetStringHoppersPrice);
+HopperRouter.put(
+  "/price",
+  protect,
+  roleCheck(["Admin"]),
+  httpUpdateStringHoppersPrice,
 );
 HopperRouter.get("/", httpGetAllStringHoppers);
 HopperRouter.delete("/delete/:id", httpDeleteStringHoppers);

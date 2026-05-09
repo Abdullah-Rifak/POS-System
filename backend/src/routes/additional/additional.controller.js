@@ -16,7 +16,6 @@ const httpCreateAdditional = async (req, res) => {
       .status(201)
       .json({ message: "Borrow additional", data: additional });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "Error in creating additional in controller", error });

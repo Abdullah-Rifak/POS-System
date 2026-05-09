@@ -2,7 +2,6 @@ const returnedItems = require("./return.mongo");
 const Items = require("./item.mongo");
 const Supplier = require("./supplier.mongo");
 const Stock = require("./stock.mongo");
-// const { recalcSupplierPayment } = require("./supplier.model");
 
 const addReturnedItems = async (itemId, returnItem) => {
   try {

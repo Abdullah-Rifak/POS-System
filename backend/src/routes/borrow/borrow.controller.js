@@ -16,7 +16,6 @@ const httpCreateBorrow = async (req, res) => {
     const borrow = await createBorrow(data);
     return res.status(201).json({ message: "Borrow created", data: borrow });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "Error in creating borrowal in controller", error });

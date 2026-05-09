@@ -3,6 +3,8 @@ const {
   deleteStringHoppers,
   updateStringHoppers,
   getAllStringHoppers,
+  getStringHoppersPrice,
+  updateStringHoppersPrice,
 } = require("../../model/string_hoppers.model");
 
 const httpCreateStringHoppers = async (req, res) => {
@@ -38,7 +40,6 @@ const httpDeleteStringHoppers = async (req, res) => {
       .status(201)
       .json({ messaage: "Hoppers entry deleted", deletedStringHoppers });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "Error deleting hoppers entry", error });
@@ -54,10 +55,42 @@ const httpUpdateStringHoppers = async (req, res) => {
       .status(201)
       .json({ message: "Hoppers entry updated", updatedHoppers });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "error updating hoppers entry", error });
+  }
+};
+
+const httpGetStringHoppersPrice = async (req, res) => {
+  try {
+    const stringHoppersPrice = await getStringHoppersPrice();
+    return res
+      .status(200)
+      .json({ stringhoppers: { price: stringHoppersPrice.price } });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "error getting hoppers price", error });
+  }
+};
+
+const httpUpdateStringHoppersPrice = async (req, res) => {
+  if (!Number.isFinite(Number(req.body.price)) || Number(req.body.price) < 0) {
+    return res
+      .status(400)
+      .json({ message: "Valid non-negative price is required" });
+  }
+
+  try {
+    const updatedPrice = await updateStringHoppersPrice(req.body.price);
+    return res.status(200).json({
+      message: "Hoppers price updated",
+      stringhoppers: { price: updatedPrice.price },
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "error updating hoppers price", error: error.message });
   }
 };
 module.exports = {
@@ -65,4 +98,6 @@ module.exports = {
   httpGetAllStringHoppers,
   httpDeleteStringHoppers,
   httpUpdateStringHoppers,
+  httpGetStringHoppersPrice,
+  httpUpdateStringHoppersPrice,
 };

@@ -2,7 +2,6 @@ const Stock = require("./stock.mongo");
 const Items = require("./item.mongo");
 const returnItems = require("./return.mongo");
 const mongoose = require("mongoose");
-// const { recalcSupplierPayment } = require("./supplier.model");
 
 const addSuppliedStock = async (itemId, quantity) => {
   try {
@@ -54,15 +53,10 @@ const updateCombinedStockAndReturn = async (id, { returnItem, quantity }) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new Error("Invalid Return ID");
   }
-  console.log(
-    " [updateCombinedStockAndReturn] Searching returnItems for ID:",
-    id
-  );
+  console.log(" [updateCombinedStockAndReturn] Searching returnItems for ID");
   // Find the Return record
   const returnDoc = await returnItems.findById(id);
   if (!returnDoc) throw new Error("Return record not found");
-
-  console.log(" [updateCombinedStockAndReturn] Found returnDoc:", returnDoc);
 
   // Update Return
   returnDoc.returnItem = returnItem;
@@ -109,12 +103,12 @@ const getAllStockWithReturns = async (date = new Date()) => {
 
         // Find all returns linked to this item
         const relatedReturns = returns.filter(
-          (ret) => ret.itemId?.toString() === stock.itemId._id.toString()
+          (ret) => ret.itemId?.toString() === stock.itemId._id.toString(),
         );
 
         const totalReturned = relatedReturns.reduce(
           (sum, ret) => sum + (Number(ret.returnItem) || 0),
-          0
+          0,
         );
 
         // Calculate profit correctly
@@ -152,7 +146,7 @@ const updateStock = async (data) => {
       {
         quantity: data.quantity,
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updatedStock) {

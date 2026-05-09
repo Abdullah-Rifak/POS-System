@@ -1,5 +1,4 @@
 const items = require("./item.mongo");
-//const mongoose = require("mongoose");
 
 const createItem = async (data) => {
   try {
@@ -49,7 +48,7 @@ const updateItem = async (data) => {
         cost: data.cost,
         price: data.price,
       },
-      { new: true }
+      { new: true },
     );
     if (!updatedItem) {
       throw new Error("Update not found");

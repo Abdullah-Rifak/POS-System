@@ -12,7 +12,6 @@ const httpCreateItem = async (req, res) => {
     // }
     return res.status(201).json(await createItem(req.body));
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ message: "Error in creating acccount in controller", error });
